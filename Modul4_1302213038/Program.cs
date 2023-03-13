@@ -14,7 +14,7 @@ public class KodeBuah
 
 public class PosisiKarakterGame
 {
-    public enum State { Berdiri, Tengkurap, Terbang, Jongkok };
+    public enum State { berdiri, tengkurap, terbang, jongkok };
 
     public static void Main()
     {
@@ -22,12 +22,49 @@ public class PosisiKarakterGame
         string getKdb = KodeBuah.getKodeBuah(KodeBuah.namaBuah.Anggur);
         Console.WriteLine("Kode buah Anggur adalah " + getKdb + ".\n");
 
-        State state = State.Berdiri;
-        string[] outputLabel = { "posisi take off", "posisi landing"};
+        State state = State.berdiri;
+        string[] outputLabel = { "Berdiri", "Tengkurap", "Terbang", "Jongkok"};
+        /*string[] outputLabel = { "posisi standby", "posisi istirahat",
+            "posisi take off", "posisi landing"};*/
 
         while (state != null)
         {
-            Console.WriteLine(outputLabel[])
+            Console.WriteLine(outputLabel[(int) state]);
+            Console.Write("Enter Button: ");
+
+            string input = Console.ReadLine();
+            switch (state)
+            {
+                case State.berdiri:
+                    if (input == "S")
+                    {
+                        state = State.jongkok;
+                    } else if (input == "W")
+                    {
+                        state = State.terbang;
+                        Console.WriteLine("posisi take off\n");
+                    } else
+                    {
+                        state = State.berdiri;
+                        Console.WriteLine("Invalid input!\n");
+                    }
+                    break;
+
+                case State.terbang:
+                    if (input == "X")
+                    {
+                        state = State.jongkok;
+                        Console.WriteLine("posisi landing\n");
+                    } else if (input == "S")
+                    {
+                        state = State.berdiri;
+                    } else
+                    {
+                        state = State.terbang;
+                        Console.WriteLine("Invalid input!\n");
+                    }
+                    break;
+            }
         }
     }
 }
